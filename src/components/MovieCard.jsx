@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./MovieCard.module.css";
+import { FaUserAlt } from "react-icons/fa";
 
 export function MovieCard({ movie }) {
     const imageUrl = "https://image.tmdb.org/t/p/w300" + movie.poster_path;

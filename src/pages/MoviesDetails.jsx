@@ -3,24 +3,33 @@ import styles from "./MovieDetails.module.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { get } from "../utils/httpClient";
+import { Spinner } from "../components/Spinner";
+
 
 export function MovieDetails() {
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
-    const LANG = "?language=es";
+    const [isLoading, setIsLoading] = useState(true);
+    const lang = "?language=es"; // Switch Spanich
 
     useEffect(() => {
-        get("/movie/" + movieId + LANG).then((data) => {
+        setIsLoading(true);
+
+        get("/movie/" + movieId + lang).then((data) => {
+            setIsLoading(false);
             setMovie(data);
-            console.log(data);
         });
     }, [movieId]);
 
+    if (isLoading) {
+        return <Spinner/>
+    }
+    
     if (!movie) {
         return null;
     }
 
-    const imageUrl = "https://image.tmdb.org/t/p/w300" + movie.poster_path;
+    const imageUrl = "https://image.tmdb.org/t/p/w300" + movie.poster_path || + movie.backdrop_path;
     return (
         <div className={`${styles.detailContainer} ${styles.movieDetails}`}>
             <img
