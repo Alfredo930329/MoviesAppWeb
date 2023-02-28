@@ -1,0 +1,41 @@
+/* body {
+    background: linear-gradient(black, blue);
+} */
+
+.detailContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.col {
+    max-width: 400px;
+    height: auto;
+    height: 80%;
+    margin: 15px;
+}
+
+.colText {
+    padding: 5%;
+}
+
+.strongStyles {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #19e20a, 0 0 40px #19e20a, 0 0 50px #19e20a, 0 0 60px #19e20a, 0 0 70px #19e20a;
+}
+
+.movieImage {
+    border-radius: 15px;
+}
+
+.movieDetails {
+    font-size: 1.5rem;
+}
+
+.firstItem {
+    margin-top: 0;
+}
+
+.btnReturn {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #19e20a, 0 0 40px #19e20a, 0 0 50px #19e20a, 0 0 60px #19e20a, 0 0 70px #19e20a;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
