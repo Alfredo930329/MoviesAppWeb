@@ -1,9 +1,11 @@
+import styles from "./assets/MovieDetails.module.css";
 import { Link } from "react-router-dom";
-import styles from "./MovieDetails.module.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { get } from "../utils/httpClient";
 import { Spinner } from "../components/Spinner";
+import { getMovieImg } from "../utils/getMovieImg";
+import { description, genres } from "../utils/getMoviesDetails";
 
 
 export function MovieDetails() {
@@ -11,7 +13,7 @@ export function MovieDetails() {
     const [movie, setMovie] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const lang = "?language=es"; // Switch Spanich
-
+    
     useEffect(() => {
         setIsLoading(true);
 
@@ -29,7 +31,9 @@ export function MovieDetails() {
         return null;
     }
 
-    const imageUrl = "https://image.tmdb.org/t/p/w300" + movie.poster_path || + movie.backdrop_path;
+    const imageUrl = getMovieImg(movie.poster_path, 300);
+    const details = description(movie.overview);
+    const genero = genres(movie.genres.map((genre) => genre.name).join(", "));
     return (
         <div className={`${styles.detailContainer} ${styles.movieDetails}`}>
             <img
@@ -54,13 +58,13 @@ export function MovieDetails() {
                 </p>
                 <p>
                     <strong className={styles.strongStyles}>Género: </strong>
-                    {movie.genres.map((genre) => genre.name).join(", ")}
+                    {genero}
                 </p>
                 <p>
                     <strong className={styles.strongStyles}>
                         Descripción:{" "}
                     </strong>{" "}
-                    {movie.overview}
+                    {details}
                 </p>
             </div>
             <div className={styles.btnReturn}><Link to="/">VOLVER</Link></div>
