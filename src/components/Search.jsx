@@ -1,11 +1,10 @@
 import styles from "./assets/Search.module.css";
-import { useHistory } from "react-router-dom";
-import { useQuery } from "../hooks/useQuery";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export function Search() {
-    const query = useQuery();
+    const [query, setQuery] = useSearchParams();
     const search = query.get("search");
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,9 +19,10 @@ export function Search() {
                     value={search}
                     onChange={(e) => {
                         const value = e.target.value;
-                        history.push("/?search=" + value);
+                        setQuery({ search: value });
+                        // navigate("/?search=" + value);
                     }}
-                    placeholder="Buscar por... Titulo, Actor, Genero"
+                    placeholder="Buscar peliculas"
                     aria-label="Buscar películas"
                 />
             </div>
